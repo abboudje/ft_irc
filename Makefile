@@ -11,7 +11,7 @@ INC_DIR = includes
 NAME = ircserv
 
 # Source files
-SRC_FILES = main.cpp # Server.cpp Client.cpp Channel.cpp Command.cpp
+SRC_FILES = main.cpp  Server.cpp Client.cpp Channel.cpp # Command.cpp
 #SRC_COMMAND_FILES = NickCommand.cpp JoinCommand.cpp PartCommand.cpp PrivmsgCommand.cpp QuitCommand.cpp
 
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
