@@ -102,10 +102,10 @@ void Server::_handleClientData(int clientFd) {
             
             // This is where you will call your command handler
             std::cout << "Processing command from fd " << clientFd << ": " << command << std::endl;
-            // _processCommand(clientFd, command); // TODO: Implement command processing
+            // _processCommand(clientFd, command); // TODO: parti de Emine
         }
     } else if (bytesRead == 0) {
-        // Client disconnected gracefully
+        // disconnection
         std::cout << "Client on fd " << clientFd << " disconnected." << std::endl;
         // Find index to remove
         for (size_t i = 1; i < _pollFds.size(); ++i) {

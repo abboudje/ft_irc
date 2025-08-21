@@ -37,7 +37,15 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | $(OBJ_DIR)
 # Create the object directory if it doesn't exist
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
-
+run:
+	./ircserv 5555 123
+val:
+	valgrind \
+	  --leak-check=full \
+	  --show-leak-kinds=all \
+	  --track-fds=yes \
+	  --track-origins=yes \
+	  ./ircserv 5555 123
 # Clean up object files
 clean:
 	rm -rf $(OBJ_DIR)
