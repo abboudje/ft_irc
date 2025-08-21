@@ -14,24 +14,24 @@ Server::Server(int port, std::string& password){
 
 // _setupServer: Creates, configures, binds, and listens on the server socket.
 void Server::_setupServer(){
-    // 1. Create socket
+    // creation
     _serverFd = socket(AF_INET, SOCK_STREAM, 0);
     if (_serverFd < 0) {
         throw std::runtime_error("Error: Failed to create socket: " + std::string(strerror(errno)));
     }
 
-    // 2. Set socket to be reusable
+    // setup 
     int opt = 1;
     if (setsockopt(_serverFd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt)) < 0) {
         throw std::runtime_error("Error: Failed to set socket options: " + std::string(strerror(errno)));
     }
 
-    // 3. Set socket to non-blocking
+    // set  to non-blocking
     if (fcntl(_serverFd, F_SETFL, O_NONBLOCK) < 0) {
         throw std::runtime_error("Error: Failed to set socket to non-blocking: " + std::string(strerror(errno)));
     }
 
-    // 4. Bind socket
+    // bind socket
     struct sockaddr_in serverAddr;
     serverAddr.sin_family = AF_INET;
     serverAddr.sin_addr.s_addr = INADDR_ANY;
@@ -40,12 +40,12 @@ void Server::_setupServer(){
         throw std::runtime_error("Error: Failed to bind socket: " + std::string(strerror(errno)));
     }
 
-    // 5. Listen for connections
+    // listen for connections
     if (listen(_serverFd, 10) < 0) {
         throw std::runtime_error("Error: Failed to listen on socket: " + std::string(strerror(errno)));
     }
 
-    // Add server socket to the poll vector
+    // add server socket to the poll vector
     struct pollfd serverPollFd;
     serverPollFd.fd = _serverFd;
     serverPollFd.events = POLLIN;
@@ -54,7 +54,7 @@ void Server::_setupServer(){
     std::cout << "Server setup complete. Listening on port " << _port << "." << std::endl;
 }
 
-// _acceptNewClient: Accepts a new client connection.
+//  acceptNewClient: Accepts a new client connection.
 void Server::_acceptNewClient() {
     struct sockaddr_in clientAddr;
     socklen_t clientLen = sizeof(clientAddr);
@@ -64,7 +64,7 @@ void Server::_acceptNewClient() {
         return;
     }
 
-    // Set client socket to non-blocking
+    // set client socket to non-blocking
     fcntl(clientFd, F_SETFL, O_NONBLOCK);
 
     // Add new client to poll vector
@@ -102,7 +102,7 @@ void Server::_handleClientData(int clientFd) {
             
             // This is where you will call your command handler
             std::cout << "Processing command from fd " << clientFd << ": " << command << std::endl;
-            // _processCommand(clientFd, command); // TODO: parti de Emine
+            // _processCommand(clientFd, command); // TODO: parsing et exec command ya Abdesami3
         }
     } else if (bytesRead == 0) {
         // disconnection

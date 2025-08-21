@@ -9,26 +9,26 @@
 
 int main() {
 
-    // Create a socket and bind it to port 6667
+    // Create socket and bind it to port 6667
     int server_fd = socket(AF_INET, SOCK_STREAM, 0);
     if (server_fd < 0) {    
         std::cerr << "Error creating socket: " << strerror(errno) << std::endl;
         return 1;
     }
-    // Set up the server address structure
+    // Set up the server addr
     struct sockaddr_in server_addr;
     std::memset(&server_addr, 0, sizeof(server_addr));
     server_addr.sin_family = AF_INET;
     server_addr.sin_addr.s_addr = INADDR_ANY;
     server_addr.sin_port = htons(6667);
-    // Bind the socket to the address and port
+    // bind the socket to the address and port
     if (bind(server_fd, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0) {
         std::cerr << "Error binding socket: " << strerror(errno) << std::endl;
         close(server_fd);
         return 1;
     }
 
-    // Listen for incoming connections
+    // listen for incoming connections
     if (listen(server_fd, 5) < 0) {
         std::cerr << "Error listening on socket: " << strerror(errno) << std::endl;
         close(server_fd);
@@ -58,7 +58,7 @@ int main() {
     }
     // get data 
 
-    // Successfully created and bound the socket
+    // created and bound the socket
     std::cout << "Server is listening on port 6667." << std::endl;
     std::cout << "Socket created and bound successfully." << std::endl;
     close(server_fd);

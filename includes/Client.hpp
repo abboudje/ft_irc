@@ -20,12 +20,12 @@ class Client{
         Client(const Client& other);
         Client& operator=(const Client& other);
         ~Client();
-        //getters
+        //getter
         int getFd() const;
         std::string& getBuffer();
         const std::string& getNickname() const;
         const std::string& getUsername() const;
-        //setters
+        //setter
         void setNickname(const std::string& nickname);
         void setUsername(const std::string& username);
         void setAuthenticated(bool authenticated);

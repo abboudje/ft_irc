@@ -1,6 +1,5 @@
 #include "Server.hpp"
 #include "Client.hpp"
-#include "Channel.hpp"
 #include <iostream>
 #include <cstdlib>
 #include <csignal>
